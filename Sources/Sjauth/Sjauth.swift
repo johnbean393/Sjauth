@@ -53,7 +53,9 @@ public class Sjauth {
 		var throwError: Error?
 		let task: URLSessionDataTask = URLSession(configuration: .default).dataTask(with: request) { (data, response, error) -> Void in
 			if response != nil {
-				print(response!)
+				#if DEBUG
+					print(response!)
+				#endif
 				let statusCode: Int = (response as! HTTPURLResponse).statusCode
 				if statusCode != 200 {
 					throwError = SjauthError.unknownError
