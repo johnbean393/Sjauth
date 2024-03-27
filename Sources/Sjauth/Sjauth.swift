@@ -11,7 +11,7 @@ public class Sjauth {
 	
 	public enum SjauthError: Error {
 		case notOnStuWireless
-		case wrongPassword
+		case unknownError
 	}
 	
 	public static func login(username: String, password: String) throws {
@@ -24,7 +24,6 @@ public class Sjauth {
 		var request: URLRequest = URLRequest(url: url)
 		request.httpMethod = "POST"
 		request.httpBody = loginCredentials.encode()
-		print(String(data: loginCredentials.encode(), encoding: .utf8)!)
 		request.setValue(
 			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:104.0) Gecko/20100101 Firefox/104.0",
 			forHTTPHeaderField: "User-Agent"
@@ -54,9 +53,10 @@ public class Sjauth {
 		var throwError: Error?
 		let task: URLSessionDataTask = URLSession(configuration: .default).dataTask(with: request) { (data, response, error) -> Void in
 			if response != nil {
+				print(response!)
 				let statusCode: Int = (response as! HTTPURLResponse).statusCode
 				if statusCode != 200 {
-					throwError = SjauthError.wrongPassword
+					throwError = SjauthError.unknownError
 				}
 			} else {
 				throwError = SjauthError.notOnStuWireless
