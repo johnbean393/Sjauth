@@ -17,7 +17,7 @@ public class Sjauth {
 	public static func login(url: String = "http://sjauth.ykpaoschool.cn/ac_portal/login.php", username: String, password: String) throws {
 		
 		// Init codable struct containing login credentials
-		let loginCredentials: LoginParams = LoginParams(userName: "s20407", pwd: "377580Aa!")
+		let loginCredentials: LoginParams = LoginParams(userName: username, pwd: password)
 		
 		// Make HTTP POST request
 		let url: URL = URL(string: url)!
