@@ -14,13 +14,13 @@ public class Sjauth {
 		case unknownError
 	}
 	
-	public static func login(username: String, password: String) throws {
+	public static func login(url: String = "http://sjauth.ykpaoschool.cn/ac_portal/login.php", username: String, password: String) throws {
 		
 		// Init codable struct containing login credentials
 		let loginCredentials: LoginParams = LoginParams(userName: "s20407", pwd: "377580Aa!")
 		
 		// Make HTTP POST request
-		let url: URL = URL(string: "http://sjauth.ykpaoschool.cn/ac_portal/login.php")!
+		let url: URL = URL(string: url)!
 		var request: URLRequest = URLRequest(url: url)
 		request.httpMethod = "POST"
 		request.httpBody = loginCredentials.encode()
