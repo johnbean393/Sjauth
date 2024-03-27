@@ -10,7 +10,7 @@ import Foundation
 struct LoginParams: Codable {
 	
 	init(userName: String, pwd: String) {
-		let rckey: String = "\(Int(Date.now.timeIntervalSince1970 * 1000))"
+		let rckey: String = "\(Int(Date().timeIntervalSince1970 * 1000))"
 		self.userName = userName
 		self.pwd = doEncryptRC4(pwd, passwd: rckey)
 		self.auth_tag = rckey
